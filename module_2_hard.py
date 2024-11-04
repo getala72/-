@@ -143,55 +143,19 @@
 
 Файл с кодом (module_2_hard.py) прикрепите к домашнему заданию или пришлите ссылку на ваш GitHub репозиторий с файлом решения.
 '''
+def generate_password(n):
+    pairs = []
+    for i in range(1, n):
+        for j in range(i + 1, n):
+            if n % (i + j) == 0:
+                pairs.append((i, j))
 
-import random
-num_lst=[]
-def lst_create(start=3,end=20):
-    for i in range(start,end+1):
-        num_lst.append(i)
-    return num_lst    
+    result = ''
+    for pair in pairs:
+        result += str(pair[0]) + str(pair[1])
 
-def rendom_create():
-    rendom_lst=lst_create()[random.randint(lst_create()[0],len(lst_create()))]
-    return rendom_lst
+    return result
 
-
-def spisok_par(n=20):
-    spisok=[]
-    for i in range(n,0,-1):
-        para=[]
-        if i>=0 and n-i>0:
-            if (n-i) or i  not in para:
-                para.append(n-i)
-                para.append(i)
-            if [para[1], para[0]] not in spisok:
-                spisok.append(para)
-        else:
-            continue    
-    return spisok    
-
-def algoritm(get_num):
-    a_list = []
-    for i in range(get_num-1,0-1):
-        if get_num%i==0:
-            if len(spisok_par (i))>0:
-                for p in spisok_par(i):
-                    a_list.append(p)
-    for i in spisok_par(get_num):
-        a_list.append(i)
-    for i in a_list:
-        if i[0]== i[1]:
-            a_list.remove(i)  
-    a_list=sorted(a_list)
-    resalt=''
-    for i in a_list:
-        for g in i :   
-            resalt+=str(g)
-    print(f'{get_num} - {resalt}')        
-
-def result():
-    for i in lst_create():
-        algoritm(i)
-             
-
-result()
+n = int(input("Введите число n (от 3 до 20): "))
+result = generate_password(n)
+print(result)
